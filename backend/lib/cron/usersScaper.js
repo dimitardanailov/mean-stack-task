@@ -1,10 +1,14 @@
-import dummyData from './dummyData.json'
+import db from '../db'
 import uniqueEmails from '../unique'
+import dummyData from './dummyData.json'
 
 async function runCron() {
-  const users = uniqueEmails(dummyData.records)
+  const users = await db.get('users').value()
+  if (users.length > 0) return
 
-  console.log('users', users)
+  const dummyUsers = uniqueEmails(dummyData.users)
+
+  db.get('users').push(dummyUsers).write()
 }
 
 export {runCron}
