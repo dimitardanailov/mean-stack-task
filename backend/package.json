@@ -1,0 +1,22 @@
+{
+  "name": "mean-stack-example-task",
+  "version": "1.0.0",
+  "description": "Service is working only with user data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dimitardanailov/mean-stack-task.git"
+  },
+  "keywords": [
+    "Mean"
+  ],
+  "author": "Dimitar Danailov <dimityr.danailov@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dimitardanailov/mean-stack-task/issues"
+  },
+  "homepage": "https://github.com/dimitardanailov/mean-stack-task#readme"
+}
