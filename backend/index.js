@@ -1,7 +1,7 @@
 'use strict'
 
 import express from 'express'
-import db from './lib/db'
+import './lib/cron'
 
 const app = express()
 
