@@ -4,7 +4,8 @@
   "description": "Service is working only with user data",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon -r esm index.js",
+    "start": "node -r esm index.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,8 @@
   "homepage": "https://github.com/dimitardanailov/mean-stack-task#readme",
   "dependencies": {
     "esm": "^3.2.25",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "lowdb": "^1.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
