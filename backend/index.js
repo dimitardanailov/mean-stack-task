@@ -3,6 +3,8 @@
 import express from 'express'
 import './lib/cron'
 import db from './lib/db'
+import dbEmailIsUnque from './lib/db/emailIsUnique'
+import artistRoleIsUnque from './lib/db/artistRoleIsUnque'
 
 const app = express()
 
@@ -20,7 +22,7 @@ app.get('/users', async (_, res) => {
 
 app.get('/users/email-is-unique/:email', async (req, res) => {
   const {email} = req.params
-  const emailIsUnique = await db.get('users').find({email: email}).value()
+  const emailIsUnique = await dbEmailIsUnque(email)
 
   if (typeof emailIsUnique === 'undefined') {
     res.json({
@@ -33,7 +35,61 @@ app.get('/users/email-is-unique/:email', async (req, res) => {
   })
 })
 
-app.get('/users/add', async (_, res, __) => {})
+app.get('/users/role-is-art-manager', async (_, res) => {
+  const dbHasArtManager = await artistRoleIsUnque()
+
+  if (typeof dbHasArtManager === 'undefined') {
+    res.json({
+      artManagerIsFree: true,
+    })
+  }
+
+  res.json({
+    artManagerIsFree: false,
+  })
+})
+
+app.post('/user', async (req, res) => {
+  const {firstName, lastName, email, role} = req.body
+
+  const dbRecordIsValid = dbEmailIsUnque(email) && artistRoleIsUnque()
+
+  if (!dbRecordIsValid) {
+    res.status(403).send('Email or Role data are invalid')
+  }
+
+  const user = {
+    firstName,
+    lastName,
+    email,
+    role,
+  }
+
+  db.get('users').push(user).write()
+
+  res.json({user})
+})
+
+app.put('/user', async (req, res) => {
+  const {firstName, email} = req.body
+
+  db.get('users').find({email: email}).assign({firstName: firstName}).write()
+
+  const user = {
+    firstName,
+    email,
+  }
+
+  res.json({user})
+})
+
+app.delete('/user', async (req, res) => {
+  const {email} = req.body
+
+  db.get('users').remove({email: email}).write()
+
+  res.status(200)
+})
 
 app.get('/', (_, res) => {
   res.status(200).send('Hello, world!').end()
