@@ -1,1 +1,24 @@
-<p>add-user works!</p>
+<h1>Create an user</h1>
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+  <section>
+    <mat-form-field floatPlaceholder="always">
+      <input matInput placeholder="First name" type="text" required />
+      <mat-error *ngIf=""></mat-error>
+    </mat-form-field>
+  </section>
+
+  <section>
+    <mat-form-field floatPlaceholder="always">
+      <input matInput placeholder="Last name" type="text" #lastName required />
+    </mat-form-field>
+  </section>
+
+  <section>
+    <mat-form-field floatPlaceholder="always">
+      <input matInput placeholder="Email" type="email" #email required />
+    </mat-form-field>
+  </section>
+
+  <button>Submit</button>
+</form>
