@@ -8,7 +8,9 @@ async function runCron() {
 
   const dummyUsers = uniqueEmails(dummyData.users)
 
-  db.get('users').push(dummyUsers).write()
+  dummyUsers.forEach(user => {
+    db.get('users').push(user).write()
+  })
 }
 
 export {runCron}
