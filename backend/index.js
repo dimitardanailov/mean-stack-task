@@ -1,12 +1,15 @@
 'use strict'
 
 import express from 'express'
+import cors from 'cors'
+
 import './lib/cron'
 import db from './lib/db'
 import dbEmailIsUnque from './lib/db/emailIsUnique'
 import artistRoleIsUnque from './lib/db/artistRoleIsUnque'
 
 const app = express()
+app.use(cors())
 
 app.get('/v1', (_, res) => {
   res.status(200).send('v1 is up and running').end()
