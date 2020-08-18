@@ -5,7 +5,7 @@ const adapter = new FileSync('db.json')
 const db = low(adapter)
 
 const defaultSchema = {
-  records: [],
+  users: [],
 }
 
 db.defaults(defaultSchema).write()
