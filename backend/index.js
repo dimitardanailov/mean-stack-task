@@ -18,15 +18,22 @@ app.get('/users', async (_, res) => {
   })
 })
 
-app.get('/users/add', async (_, res, __) => {
-  // const twitterFollowers = await db.get('twitterFollowers')
-  // const instagramFollowers = await db.get('instagramFollowers')
-  /*
+app.get('/users/email-is-unique/:email', async (req, res) => {
+  const {email} = req.params
+  const emailIsUnique = await db.get('users').find({email: email}).value()
+
+  if (typeof emailIsUnique === 'undefined') {
+    res.json({
+      emailIsUnique: false,
+    })
+  }
+
   res.json({
-    twitterFollowers,
-    instagramFollowers,
-  })*/
+    emailIsUnique: emailIsUnique,
+  })
 })
+
+app.get('/users/add', async (_, res, __) => {})
 
 app.get('/', (_, res) => {
   res.status(200).send('Hello, world!').end()
