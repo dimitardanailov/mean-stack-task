@@ -61,7 +61,10 @@
             >
           </div>
           <div [className]="'operation-remove'">
-            <mat-icon aria-hidden="false" aria-label="Remove delete icon"
+            <mat-icon
+              aria-hidden="false"
+              aria-label="Remove delete icon"
+              (click)="deleteRow(element.email)"
               >delete</mat-icon
             >
           </div>
