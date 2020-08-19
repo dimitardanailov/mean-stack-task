@@ -36,7 +36,9 @@
         <mat-select name="role">
           <mat-option [value]="'artist'">Artist</mat-option>
           <mat-option [value]="'designer'">Designer</mat-option>
-          <mat-option [value]="'art_manager'">Art manager</mat-option>
+          <mat-option [value]="'art_manager'" *ngIf="!dbHasArtManager"
+            >Art manager</mat-option
+          >
         </mat-select>
       </mat-form-field>
     </section>

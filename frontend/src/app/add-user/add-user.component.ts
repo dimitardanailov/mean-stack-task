@@ -15,7 +15,6 @@ export class AddUserComponent implements OnInit {
 
   async ngOnInit(): Promise<any> {
     this.dbHasArtManager = await this.updateDbHasArtManagerProperty()
-    console.log('dbHasArtManager', this.dbHasArtManager)
   }
 
   onSubmit(f: NgForm) {
