@@ -13,8 +13,7 @@ export class ListUsersComponent implements OnInit {
     'lastName',
     'email',
     'role',
-    'edit',
-    'remove',
+    'operations',
   ]
   users: User[] = []
   positions: SelectBoxItem[] = [
