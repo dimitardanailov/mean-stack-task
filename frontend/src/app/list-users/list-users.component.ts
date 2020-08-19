@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core'
 import User from '../../models/User'
 import SelectBoxItem from '../../ui-models/SelectBoxItem'
 import {environment} from '../../environments/environment'
+import roles from '../../db/roles'
 
 @Component({
   selector: 'app-list-users',
@@ -23,6 +24,8 @@ export class ListUsersComponent implements OnInit {
     {key: 'designer', value: 'Designer'},
     {key: 'art_manager', value: 'Art manager'},
   ]
+
+  roles: Map<string, string> = roles
 
   constructor() {}
 
