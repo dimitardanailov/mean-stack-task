@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core'
 import {NgForm} from '@angular/forms'
+import User from '../../models/User'
 
 @Component({
   selector: 'app-add-user',
@@ -7,6 +8,8 @@ import {NgForm} from '@angular/forms'
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
+  managerPositionIsAvailable = true
+
   constructor() {}
 
   ngOnInit(): void {}
