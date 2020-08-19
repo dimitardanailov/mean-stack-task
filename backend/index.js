@@ -6,7 +6,7 @@ import cors from 'cors'
 import './lib/cron'
 import db from './lib/db'
 import dbEmailIsUnque from './lib/db/emailIsUnique'
-import artistRoleIsUnque from './lib/db/artistRoleIsUnque'
+import databaseHasArtManager from './lib/db/databaseHasArtManager'
 
 const app = express()
 app.use(cors())
@@ -27,28 +27,16 @@ app.get('/users/email-is-unique/:email', async (req, res) => {
   const {email} = req.params
   const emailIsUnique = await dbEmailIsUnque(email)
 
-  if (typeof emailIsUnique === 'undefined') {
-    res.json({
-      emailIsUnique: false,
-    })
-  }
-
   res.json({
-    emailIsUnique: emailIsUnique,
+    emailIsUnique,
   })
 })
 
-app.get('/users/role-is-art-manager', async (_, res) => {
-  const dbHasArtManager = await artistRoleIsUnque()
-
-  if (typeof dbHasArtManager === 'undefined') {
-    res.json({
-      artManagerIsFree: true,
-    })
-  }
+app.get('/users/role-art-manager-is-available', async (_, res) => {
+  const dbHasArtManager = await databaseHasArtManager()
 
   res.json({
-    artManagerIsFree: false,
+    dbHasArtManager,
   })
 })
 
