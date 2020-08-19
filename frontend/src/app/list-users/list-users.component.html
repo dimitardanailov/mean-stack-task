@@ -1,72 +1,75 @@
-<form>
-  <section class="form-filters">
-    <mat-form-field [className]="'form-filter-field'">
-      <mat-label>Role: </mat-label>
-      <mat-select name="role">
-        <mat-option [value]="item.key" *ngFor="let item of positions">
-          {{ item.value }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+<section [className]="'page-holder'">
+  <div [className]="'page-title'">Database users</div>
+  <form>
+    <section class="form-filters">
+      <mat-form-field [className]="'form-filter-field'">
+        <mat-label>Role: </mat-label>
+        <mat-select name="role">
+          <mat-option [value]="item.key" *ngFor="let item of positions">
+            {{ item.value }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field [className]="'form-filter-field'">
-      <input matInput placeholder="First name" type="text" />
-    </mat-form-field>
+      <mat-form-field [className]="'form-filter-field'">
+        <input matInput placeholder="First name" type="text" />
+      </mat-form-field>
 
-    <mat-form-field [className]="'form-filter-field'">
-      <input matInput placeholder="Last Name" type="text" />
-    </mat-form-field>
+      <mat-form-field [className]="'form-filter-field'">
+        <input matInput placeholder="Last Name" type="text" />
+      </mat-form-field>
 
-    <mat-form-field [className]="'form-filter-field'">
-      <input matInput placeholder="Email" type="email" />
-    </mat-form-field>
-  </section>
-</form>
+      <mat-form-field [className]="'form-filter-field'">
+        <input matInput placeholder="Email" type="email" />
+      </mat-form-field>
+    </section>
+  </form>
 
-<table mat-table [dataSource]="users" class="mat-elevation-z8">
-  <!-- First name column -->
-  <ng-container matColumnDef="firstName">
-    <th mat-header-cell *matHeaderCellDef>First Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
-  </ng-container>
+  <table mat-table [dataSource]="users" class="mat-elevation-z8">
+    <!-- First name column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>First Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+    </ng-container>
 
-  <!-- Last Name Column -->
-  <ng-container matColumnDef="lastName">
-    <th mat-header-cell *matHeaderCellDef>LastName</th>
-    <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
-  </ng-container>
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>LastName</th>
+      <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+    </ng-container>
 
-  <!-- Email Column -->
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef>Email</th>
-    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-  </ng-container>
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
 
-  <!-- Role Column -->
-  <ng-container matColumnDef="role">
-    <th mat-header-cell *matHeaderCellDef>Role</th>
-    <td mat-cell *matCellDef="let element">{{ element.role }}</td>
-  </ng-container>
+    <!-- Role Column -->
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef>Role</th>
+      <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+    </ng-container>
 
-  <!-- Remove Column -->
-  <ng-container matColumnDef="operations">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let element">
-      <section [className]="'operations'">
-        <div [className]="'operation-update'">
-          <mat-icon aria-hidden="false" aria-label="Edit edit icon"
-            >edit</mat-icon
-          >
-        </div>
-        <div [className]="'operation-remove'">
-          <mat-icon aria-hidden="false" aria-label="Remove delete icon"
-            >delete</mat-icon
-          >
-        </div>
-      </section>
-    </td>
-  </ng-container>
+    <!-- Remove Column -->
+    <ng-container matColumnDef="operations">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <section [className]="'operations'">
+          <div [className]="'operation-update'">
+            <mat-icon aria-hidden="false" aria-label="Edit edit icon"
+              >edit</mat-icon
+            >
+          </div>
+          <div [className]="'operation-remove'">
+            <mat-icon aria-hidden="false" aria-label="Remove delete icon"
+              >delete</mat-icon
+            >
+          </div>
+        </section>
+      </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</section>
