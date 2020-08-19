@@ -1,7 +1,7 @@
 import db from './index'
 
 async function databaseHasArtManager() {
-  const uniquePosition = 'Art Manager'
+  const uniquePosition = 'art_manager'
   const query = await db.get('users').find({role: uniquePosition}).value()
 
   if (typeof query === 'undefined') {
