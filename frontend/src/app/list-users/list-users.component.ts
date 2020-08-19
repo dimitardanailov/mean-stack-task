@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core'
 import User from '../../models/User'
+import SelectBoxItem from '../../ui-models/SelectBoxItem'
 
 @Component({
   selector: 'app-list-users',
@@ -16,6 +17,12 @@ export class ListUsersComponent implements OnInit {
     'remove',
   ]
   users: User[] = []
+  positions: SelectBoxItem[] = [
+    {key: 'all', value: 'All'},
+    {key: 'artist', value: 'Artist'},
+    {key: 'designer', value: 'Designer'},
+    {key: 'art_manager', value: 'Art manager'},
+  ]
 
   constructor() {}
 
