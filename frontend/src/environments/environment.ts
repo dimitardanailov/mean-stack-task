@@ -8,6 +8,7 @@ export const environment = {
   production: false,
   REST_API: {
     list_users: `${REST_API_SERVER}/users`,
+    roleArtManagerIsAvailable: `${REST_API_SERVER}/users/role-art-manager-is-available`,
   },
 }
 
