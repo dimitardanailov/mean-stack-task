@@ -1,3 +1,28 @@
+<form>
+  <section class="form-filters">
+    <mat-form-field [className]="'form-filter-field'">
+      <mat-label>Role: </mat-label>
+      <mat-select name="role">
+        <mat-option [value]="item.key" *ngFor="let item of positions">
+          {{ item.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field [className]="'form-filter-field'">
+      <input matInput placeholder="First name" type="text" />
+    </mat-form-field>
+
+    <mat-form-field [className]="'form-filter-field'">
+      <input matInput placeholder="Last Name" type="text" />
+    </mat-form-field>
+
+    <mat-form-field [className]="'form-filter-field'">
+      <input matInput placeholder="Email" type="email" />
+    </mat-form-field>
+  </section>
+</form>
+
 <table mat-table [dataSource]="users" class="mat-elevation-z8">
   <!-- First name column -->
   <ng-container matColumnDef="firstName">
