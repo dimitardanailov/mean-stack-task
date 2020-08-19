@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core'
 import User from '../../models/User'
 import SelectBoxItem from '../../ui-models/SelectBoxItem'
+import {environment} from '../../environments/environment'
 
 @Component({
   selector: 'app-list-users',
@@ -26,14 +27,13 @@ export class ListUsersComponent implements OnInit {
   constructor() {}
 
   async ngOnInit(): Promise<any> {
-    const REST_API_END_POINT = 'http://localhost:8080/users'
-    fetch(REST_API_END_POINT)
+    fetch(environment.REST_API.list_users)
       .then(async res => {
         const data = await res.json()
         this.users = data.users
       })
       .catch(() => {
-        console.error(`${REST_API_END_POINT} is unreachable`)
+        console.error(`${environment.REST_API.list_users} is unreachable`)
       })
   }
 }
