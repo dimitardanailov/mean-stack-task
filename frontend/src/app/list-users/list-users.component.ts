@@ -20,8 +20,14 @@ export class ListUsersComponent implements OnInit {
   constructor() {}
 
   async ngOnInit(): Promise<any> {
-    const res = await fetch('http://localhost:8080/users')
-    const data = await res.json()
-    this.users = data.users
+    const REST_API_END_POINT = 'http://localhost:8080/users'
+    fetch(REST_API_END_POINT)
+      .then(async res => {
+        const data = await res.json()
+        this.users = data.users
+      })
+      .catch(() => {
+        console.error(`${REST_API_END_POINT} is unreachable`)
+      })
   }
 }
