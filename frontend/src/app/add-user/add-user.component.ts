@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core'
-import {NgForm} from '@angular/forms'
+import {FormBuilder} from '@angular/forms'
 import User from '../../models/User'
 import {environment} from '../../environments/environment'
 
@@ -11,21 +11,22 @@ import {environment} from '../../environments/environment'
 export class AddUserComponent implements OnInit {
   dbHasArtManager = false
   formErrorMessage = ''
+  form
 
-  constructor() {}
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      firstName: '',
+      lastName: '',
+      email: '',
+      role: '',
+    })
+  }
 
   async ngOnInit(): Promise<any> {
     this.dbHasArtManager = await this.updateDbHasArtManagerProperty()
   }
 
-  async onSubmit(f: NgForm) {
-    const user: User = {
-      firstName: 'Dimitar',
-      lastName: 'Danailov',
-      email: 'dimityr.danailov@gmail.com',
-      role: 'designer',
-    }
-
+  async onSubmit(user: User) {
     if (user.role === 'art_manager') {
       this.dbHasArtManager = await this.updateDbHasArtManagerProperty()
       if (this.dbHasArtManager) {
@@ -53,9 +54,6 @@ export class AddUserComponent implements OnInit {
     restAPIRequest.then(res => {
       console.log('response', res)
     })
-
-    console.log(f.value) // { first: '', last: '' }
-    console.log(f.valid) // false
   }
 
   async updateDbHasArtManagerProperty(): Promise<any> {

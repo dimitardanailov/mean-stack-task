@@ -4,10 +4,16 @@
     <span>Create an user</span>
   </div>
 
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
     <section [className]="'input-field'">
       <mat-form-field floatPlaceholder="always">
-        <input matInput placeholder="First name" type="text" required />
+        <input
+          matInput
+          placeholder="First name"
+          type="text"
+          required
+          formControlName="firstName"
+        />
         <mat-error *ngIf=""></mat-error>
       </mat-form-field>
     </section>
@@ -18,22 +24,28 @@
           matInput
           placeholder="Last name"
           type="text"
-          #lastName
           required
+          formControlName="lastName"
         />
       </mat-form-field>
     </section>
 
     <section>
       <mat-form-field floatPlaceholder="always">
-        <input matInput placeholder="Email" type="email" #email required />
+        <input
+          matInput
+          placeholder="Email"
+          type="email"
+          formControlName="email"
+          required
+        />
       </mat-form-field>
     </section>
 
     <section>
       <mat-form-field>
         <mat-label>Role: </mat-label>
-        <mat-select name="role">
+        <mat-select name="role" formControlName="role">
           <mat-option [value]="'artist'">Artist</mat-option>
           <mat-option [value]="'designer'">Designer</mat-option>
           <mat-option [value]="'art_manager'" *ngIf="!dbHasArtManager"
@@ -42,6 +54,8 @@
         </mat-select>
       </mat-form-field>
     </section>
+
+    {{ formErrorMessage }}
 
     <button>
       <mat-icon aria-hidden="false" aria-label="Add add icon">add</mat-icon

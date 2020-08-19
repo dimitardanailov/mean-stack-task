@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {AppMaterialModule} from './app-material.module'
 
 // Forms
-import {FormsModule} from '@angular/forms'
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 
 // Users
 import {AddUserComponent} from './add-user/add-user.component'
@@ -27,6 +27,7 @@ import {NavbarComponent} from './navbar/navbar.component'
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
