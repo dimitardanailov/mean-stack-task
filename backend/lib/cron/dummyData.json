@@ -22,43 +22,43 @@
       "firstName": "Success",
       "lastName": "Moe",
       "email": "john@example.com",
-      "role": "Jr. Developer"
+      "role": "Designer"
     },
     {
       "firstName": "Danger",
       "lastName": "moe",
       "email": "mary@example.com",
-      "role": "Developer"
+      "role": "Artist"
     },
     {
       "firstName": "Info",
       "lastName": "Dooley",
       "email": "july@example.com",
-      "role": "Artist"
+      "role": "Designer"
     },
     {
       "firstName": "Bill",
       "lastName": "Clinton",
       "email": "july@example.com",
-      "role": "Product Owner"
+      "role": "Artist"
     },
     {
       "firstName": "Warning",
       "lastName": "Refs",
       "email": "bo@example.com",
-      "role": "Sys Admin"
+      "role": "Artist"
     },
     {
       "firstName": "Active",
       "lastName": "Activeson",
       "email": "act@example.com",
-      "role": "Artist"
+      "role": "Designer"
     },
     {
       "firstName": "Penelope",
       "lastName": "Cruz",
       "email": "act@example.com",
-      "role": "Artist"
+      "role": "Designer"
     }
   ]
 }
