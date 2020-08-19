@@ -2,6 +2,7 @@
 
 import express from 'express'
 import cors from 'cors'
+import bodyParser from 'body-parser'
 
 import './lib/cron'
 import db from './lib/db'
@@ -10,6 +11,8 @@ import databaseHasArtManager from './lib/db/databaseHasArtManager'
 
 const app = express()
 app.use(cors())
+
+app.use(bodyParser.json())
 
 app.get('/v1', (_, res) => {
   res.status(200).send('v1 is up and running').end()
@@ -40,25 +43,27 @@ app.get('/users/role-art-manager-is-available', async (_, res) => {
   })
 })
 
-app.post('/user', async (req, res) => {
-  const {firstName, lastName, email, role} = req.body
+app.post('/users', async (req, res) => {
+  const user = req.body
 
-  const dbRecordIsValid = dbEmailIsUnque(email) && artistRoleIsUnque()
-
-  if (!dbRecordIsValid) {
-    res.status(403).send('Email or Role data are invalid')
+  const emailIsUnique = await dbEmailIsUnque(user.email)
+  if (!emailIsUnique) {
+    res.status(403).send('The current email is used by another user!')
   }
 
-  const user = {
-    firstName,
-    lastName,
-    email,
-    role,
+  if (user.role === 'art_manager') {
+    const companyHasArtManager = await databaseHasArtManager()
+
+    if (companyHasArtManager) {
+      res
+        .status(403)
+        .send('The current company has a general manager(art manager)')
+    }
   }
 
   db.get('users').push(user).write()
 
-  res.json({user})
+  res.json({user: user})
 })
 
 app.put('/user', async (req, res) => {
