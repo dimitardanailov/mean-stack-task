@@ -50,6 +50,8 @@ table {
   position: relative;
 
   margin-right: 0.25rem;
+
+  cursor: pointer;
 }
 
 @media (max-width: 780px) {
