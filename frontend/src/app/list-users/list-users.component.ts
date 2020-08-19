@@ -39,4 +39,36 @@ export class ListUsersComponent implements OnInit {
         console.error(`${environment.REST_API.list_users} is unreachable`)
       })
   }
+
+  async deleteRow(email): Promise<any> {
+    this.users = this.users.filter(user => {
+      return user.email !== email
+    })
+
+    await this.deleteRowRequest(email)
+  }
+
+  async deleteRowRequest(email): Promise<any> {
+    const requestObject = {
+      email,
+    }
+
+    const promise = new Promise((resolve, reject) => {
+      fetch(environment.REST_API.deleteUser, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestObject),
+      })
+        .then(() => {
+          resolve()
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+
+    return promise
+  }
 }
