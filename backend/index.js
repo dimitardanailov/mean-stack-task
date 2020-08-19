@@ -79,7 +79,7 @@ app.put('/user', async (req, res) => {
   res.json({user})
 })
 
-app.delete('/user', async (req, res) => {
+app.delete('/users', async (req, res) => {
   const {email} = req.body
 
   db.get('users').remove({email: email}).write()
