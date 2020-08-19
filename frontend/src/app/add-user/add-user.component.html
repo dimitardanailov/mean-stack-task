@@ -1,24 +1,49 @@
-<h1>Create an user</h1>
+<section [className]="'form-field'">
+  <div [className]="'form-title'">
+    <mat-icon aria-hidden="false" aria-label="Account add icon">face</mat-icon>
+    <span>Create an user</span>
+  </div>
 
-<form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-  <section>
-    <mat-form-field floatPlaceholder="always">
-      <input matInput placeholder="First name" type="text" required />
-      <mat-error *ngIf=""></mat-error>
-    </mat-form-field>
-  </section>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+    <section [className]="'input-field'">
+      <mat-form-field floatPlaceholder="always">
+        <input matInput placeholder="First name" type="text" required />
+        <mat-error *ngIf=""></mat-error>
+      </mat-form-field>
+    </section>
 
-  <section>
-    <mat-form-field floatPlaceholder="always">
-      <input matInput placeholder="Last name" type="text" #lastName required />
-    </mat-form-field>
-  </section>
+    <section>
+      <mat-form-field floatPlaceholder="always">
+        <input
+          matInput
+          placeholder="Last name"
+          type="text"
+          #lastName
+          required
+        />
+      </mat-form-field>
+    </section>
 
-  <section>
-    <mat-form-field floatPlaceholder="always">
-      <input matInput placeholder="Email" type="email" #email required />
-    </mat-form-field>
-  </section>
+    <section>
+      <mat-form-field floatPlaceholder="always">
+        <input matInput placeholder="Email" type="email" #email required />
+      </mat-form-field>
+    </section>
 
-  <button>Submit</button>
-</form>
+    <section>
+      <mat-form-field>
+        <mat-label>Role: </mat-label>
+        <mat-select name="role">
+          <mat-option [value]="'artist'">Artist</mat-option>
+          <mat-option [value]="'designer'">Designer</mat-option>
+          <mat-option [value]="'art_manager'">Art manager</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+
+    <button>
+      <mat-icon aria-hidden="false" aria-label="Add add icon">add</mat-icon
+      >Create a new user
+    </button>
+  </form>
+</section>
