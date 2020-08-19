@@ -11,6 +11,7 @@ export const environment = {
     roleArtManagerIsAvailable: `${REST_API_SERVER}/users/role-art-manager-is-available`,
     emailIsUnique: `${REST_API_SERVER}/users/email-is-unique`,
     createUser: `${REST_API_SERVER}/users`,
+    deleteUser: `${REST_API_SERVER}/users`,
   },
 }
 
