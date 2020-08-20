@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "site": "angular-ddanailov",
+    "public": "dist/frontend",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
