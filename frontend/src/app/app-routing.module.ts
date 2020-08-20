@@ -1,10 +1,27 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core'
+import {Routes, RouterModule} from '@angular/router'
 
-const routes: Routes = [];
+import {AddUserComponent} from './add-user/add-user.component'
+import {ListUsersComponent} from './list-users/list-users.component'
+
+const routes: Routes = [
+  {
+    path: 'add-user',
+    component: AddUserComponent,
+  },
+  {
+    path: '',
+    component: ListUsersComponent,
+  },
+  {
+    path: '**',
+    // TODO: PageNotFoundComponent must be added
+    component: ListUsersComponent,
+  },
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
