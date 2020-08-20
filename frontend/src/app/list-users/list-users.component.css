@@ -43,7 +43,6 @@
     0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
-.table-body,
 .table-header {
   padding: 1rem;
 }
@@ -61,7 +60,14 @@
   position: relative;
 
   display: inline-block;
-  width: 20%;
+  flex-grow: 1;
+  max-width: 20%;
+  text-overflow: hidden;
+}
+
+.table-body-row {
+  border-top: 1px solid #ccc;
+  padding: 0.8rem 1rem;
 }
 
 .table-body-row-visible {
@@ -70,6 +76,15 @@
 
 .table-body-row-hidden {
   opacity: 0.3;
+}
+
+.form-filter-buttons {
+  position: relative;
+
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 table {
