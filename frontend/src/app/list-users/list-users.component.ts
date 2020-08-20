@@ -1,8 +1,13 @@
 import {Component, OnInit} from '@angular/core'
+import {FormBuilder} from '@angular/forms'
 import User from '../../models/User'
 import SelectBoxItem from '../../ui-models/SelectBoxItem'
 import {environment} from '../../environments/environment'
 import roles from '../../db/roles'
+
+interface UIUser extends User {
+  isVisible: Boolean
+}
 
 @Component({
   selector: 'app-list-users',
@@ -17,7 +22,7 @@ export class ListUsersComponent implements OnInit {
     'role',
     'operations',
   ]
-  users: User[] = []
+  users: UIUser[] = []
   positions: SelectBoxItem[] = [
     {key: 'all', value: 'All'},
     {key: 'artist', value: 'Artist'},
@@ -26,18 +31,77 @@ export class ListUsersComponent implements OnInit {
   ]
 
   roles: Map<string, string> = roles
+  form
 
-  constructor() {}
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      firstName: 'imi',
+      lastName: '',
+      email: '',
+      role: '',
+    })
+  }
 
   async ngOnInit(): Promise<any> {
     fetch(environment.REST_API.list_users)
       .then(async res => {
         const data = await res.json()
-        this.users = data.users
+        const uiUsers = []
+        data.users.forEach(element => {
+          const tempUser = {
+            isVisible: true,
+            ...element,
+          }
+          uiUsers.push(tempUser)
+        })
+
+        this.users = uiUsers.map(element => {
+          return element
+        })
       })
       .catch(() => {
         console.error(`${environment.REST_API.list_users} is unreachable`)
       })
+  }
+
+  async filterData(): Promise<any> {
+    const filterOptions: User = this.form.value
+
+    this.users.forEach(user => {
+      const firstNameOption = this.filterTextItem(
+        user.firstName,
+        filterOptions.firstName,
+      )
+
+      const lastNameOption = this.filterTextItem(
+        user.lastName,
+        filterOptions.lastName,
+      )
+
+      const emailOption = this.filterTextItem(user.email, filterOptions.email)
+
+      const roleFilterOption = this.filterRoleItem(
+        user.role,
+        filterOptions.role,
+      )
+
+      user.isVisible =
+        firstNameOption && lastNameOption && emailOption && roleFilterOption
+    })
+  }
+
+  filterRoleItem(userRole: string, filterOption: string): Boolean {
+    if (filterOption === 'all' || filterOption === '') return true
+
+    return filterOption === userRole ? true : false
+  }
+
+  filterTextItem(dbRecord: string, filterOption: string): Boolean {
+    if (filterOption.length === 0) return true
+
+    const regExp = new RegExp(filterOption)
+
+    return regExp.test(dbRecord) ? true : false
   }
 
   async deleteRow(email): Promise<any> {
