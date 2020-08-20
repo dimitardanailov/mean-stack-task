@@ -4,7 +4,7 @@
     <section class="form-filters">
       <mat-form-field [className]="'form-filter-field'">
         <mat-label>Role: </mat-label>
-        <mat-select name="role" formControlName="role" (change)="filterData()">
+        <mat-select name="role" formControlName="role">
           <mat-option [value]="item.key" *ngFor="let item of positions">
             {{ item.value }}
           </mat-option>
@@ -17,7 +17,6 @@
           placeholder="First name"
           type="text"
           formControlName="firstName"
-          (focusout)="filterData()"
         />
       </mat-form-field>
 
@@ -39,8 +38,13 @@
         />
       </mat-form-field>
 
-      <section [className]="'form-filter-field'">
-        <button type="submit">Filter</button>
+      <section [className]="'form-filter-field form-filter-buttons'">
+        <button type="submit" class="filterButton" mat-button color="primary">
+          Filter
+        </button>
+        <button type="reset" class="filterButton" mat-button color="primary">
+          Reset
+        </button>
       </section>
     </section>
   </form>
