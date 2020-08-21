@@ -1,5 +1,12 @@
 import {Component, OnInit} from '@angular/core'
 import {FormBuilder} from '@angular/forms'
+import {MatDialog} from '@angular/material/dialog'
+
+import {
+  ListConformationDialog,
+  DialogData,
+} from './dialog/list-conformation-dialog'
+
 import User from '../../models/User'
 import SelectBoxItem from '../../ui-models/SelectBoxItem'
 import {environment} from '../../environments/environment'
@@ -33,7 +40,7 @@ export class ListUsersComponent implements OnInit {
   roles: Map<string, string> = roles
   form
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {
     this.form = this.formBuilder.group({
       firstName: '',
       lastName: '',
@@ -102,6 +109,20 @@ export class ListUsersComponent implements OnInit {
     const regExp = new RegExp(filterOption)
 
     return regExp.test(dbRecord) ? true : false
+  }
+
+  async openListConformationDialog(email): Promise<any> {
+    const dialogRef = this.dialog.open(ListConformationDialog, {
+      data: {
+        email,
+      },
+    })
+
+    dialogRef.afterClosed().subscribe(operation => {
+      if (operation) {
+        this.deleteRow(email)
+      }
+    })
   }
 
   async deleteRow(email): Promise<any> {
