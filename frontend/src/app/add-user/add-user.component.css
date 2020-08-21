@@ -1,3 +1,18 @@
+.form-title {
+  position: relative;
+
+  display: flex;
+  margin: 1rem 0;
+  flex-direction: row;
+  width: 100%;
+  font-size: 32px;
+  justify-content: center;
+}
+
+.form-title-text {
+  margin-left: 0.5rem;
+}
+
 .form-field {
   position: relative;
 
@@ -6,6 +21,7 @@
   flex-direction: column;
   align-content: center;
   justify-content: center;
+  align-items: center;
 }
 
 form {
