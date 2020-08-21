@@ -8,6 +8,7 @@ import './lib/cron'
 import db from './lib/db'
 import dbEmailIsUnque from './lib/db/emailIsUnique'
 import databaseHasArtManager from './lib/db/databaseHasArtManager'
+import {runCron} from './lib/cron/usersScaper'
 
 const app = express()
 app.use(cors())
@@ -84,7 +85,15 @@ app.delete('/users', async (req, res) => {
 
   db.get('users').remove({email: email}).write()
 
-  res.status(200)
+  res.json({
+    email: email,
+  })
+})
+
+app.get('/import', async (_, res) => {
+  runCron()
+
+  res.redirect('/users')
 })
 
 app.get('/', (_, res) => {
