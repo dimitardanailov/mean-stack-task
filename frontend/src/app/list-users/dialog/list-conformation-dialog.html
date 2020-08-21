@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>The current operation can't be rollback</h2>
+<mat-dialog-content class="mat-typography">
+  <p>
+    Do you want to remove an user with an email address
+    <span>{{data.email}}</span> from the database ?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog(false)">Close</button>
+  <button mat-button (click)="closeDialog(true)">Delete!</button>
+</mat-dialog-actions>
