@@ -71,11 +71,11 @@
 }
 
 .table-body-row-visible {
-  opacity: 1;
+  display: flex;
 }
 
 .table-body-row-hidden {
-  opacity: 0.3;
+  display: none;
 }
 
 .form-filter-buttons {
