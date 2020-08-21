@@ -105,11 +105,17 @@ export class ListUsersComponent implements OnInit {
   }
 
   async deleteRow(email): Promise<any> {
-    this.users = this.users.filter(user => {
-      return user.email !== email
+    this.users.forEach(user => {
+      if (user.email === email) {
+        user.isVisible = false
+      }
     })
 
-    await this.deleteRowRequest(email)
+    await this.deleteRowRequest(email).then(dbEmail => {
+      this.users = this.users.filter(user => {
+        return user.email !== dbEmail
+      })
+    })
   }
 
   async deleteRowRequest(email): Promise<any> {
@@ -125,8 +131,10 @@ export class ListUsersComponent implements OnInit {
         },
         body: JSON.stringify(requestObject),
       })
-        .then(() => {
-          resolve()
+        .then(async res => {
+          const data = await res.json()
+          const dbEmail = data.email
+          resolve(dbEmail)
         })
         .catch(error => {
           reject(error)
