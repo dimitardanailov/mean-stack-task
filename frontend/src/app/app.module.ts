@@ -15,7 +15,8 @@ import {ListUsersComponent} from './list-users/list-users.component'
 
 // Dialogs
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog'
-import {ListConformationDialog} from './list-users/dialog/list-conformation-dialog'
+import {ListConformationDialog} from './list-users/dialogs/list-conformation-dialog'
+import {UpdateRecordDialog} from './list-users/dialogs/update-record-dialog'
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {ListConformationDialog} from './list-users/dialog/list-conformation-dial
     AddUserComponent,
     ListUsersComponent,
     ListConformationDialog,
+    UpdateRecordDialog,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,7 @@ import {ListConformationDialog} from './list-users/dialog/list-conformation-dial
     FormsModule,
     ReactiveFormsModule,
   ],
-  entryComponents: [ListConformationDialog],
+  entryComponents: [ListConformationDialog, UpdateRecordDialog],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
   ],
