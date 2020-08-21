@@ -2,10 +2,8 @@ import {Component, OnInit} from '@angular/core'
 import {FormBuilder} from '@angular/forms'
 import {MatDialog} from '@angular/material/dialog'
 
-import {
-  ListConformationDialog,
-  DialogData,
-} from './dialog/list-conformation-dialog'
+import {ListConformationDialog} from './dialogs/list-conformation-dialog'
+import {UpdateRecordDialog} from './dialogs/update-record-dialog'
 
 import User from '../../models/User'
 import SelectBoxItem from '../../ui-models/SelectBoxItem'
@@ -40,7 +38,11 @@ export class ListUsersComponent implements OnInit {
   roles: Map<string, string> = roles
   form
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private updateRecordDialog: MatDialog,
+    private conformationDialog: MatDialog,
+  ) {
     this.form = this.formBuilder.group({
       firstName: '',
       lastName: '',
@@ -111,8 +113,27 @@ export class ListUsersComponent implements OnInit {
     return regExp.test(dbRecord) ? true : false
   }
 
+  async openUpdateRecordDialog(user: User): Promise<any> {
+    const dialogRef = this.updateRecordDialog.open(UpdateRecordDialog, {
+      data: {
+        user,
+      },
+    })
+
+    dialogRef.afterClosed().subscribe(dbUser => {
+      if (dbUser !== null) {
+        this.users.forEach(loopUser => {
+          if (loopUser.email === dbUser.email) {
+            loopUser.firstName = dbUser.firstName
+            loopUser.lastName = dbUser.lastName
+          }
+        })
+      }
+    })
+  }
+
   async openListConformationDialog(email): Promise<any> {
-    const dialogRef = this.dialog.open(ListConformationDialog, {
+    const dialogRef = this.conformationDialog.open(ListConformationDialog, {
       data: {
         email,
       },
