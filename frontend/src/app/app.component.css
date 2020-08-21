@@ -5,3 +5,16 @@ mat-sidenav-container {
 mat-sidenav {
   width: 300px;
 }
+
+.mat-nav-list-href {
+  position: relative;
+
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.mat-list-item-text-section {
+  margin-left: 0.5rem;
+}
