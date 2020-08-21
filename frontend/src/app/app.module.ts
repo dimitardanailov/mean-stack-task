@@ -12,15 +12,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 // Users
 import {AddUserComponent} from './add-user/add-user.component'
 import {ListUsersComponent} from './list-users/list-users.component'
-import {NavbarComponent} from './navbar/navbar.component'
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    AddUserComponent,
-    ListUsersComponent,
-    NavbarComponent,
-  ],
+  declarations: [AppComponent, AddUserComponent, ListUsersComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
