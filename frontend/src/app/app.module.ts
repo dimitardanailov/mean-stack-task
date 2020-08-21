@@ -13,8 +13,17 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms'
 import {AddUserComponent} from './add-user/add-user.component'
 import {ListUsersComponent} from './list-users/list-users.component'
 
+// Dialogs
+import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog'
+import {ListConformationDialog} from './list-users/dialog/list-conformation-dialog'
+
 @NgModule({
-  declarations: [AppComponent, AddUserComponent, ListUsersComponent],
+  declarations: [
+    AppComponent,
+    AddUserComponent,
+    ListUsersComponent,
+    ListConformationDialog,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,7 +32,10 @@ import {ListUsersComponent} from './list-users/list-users.component'
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  entryComponents: [ListConformationDialog],
+  providers: [
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
