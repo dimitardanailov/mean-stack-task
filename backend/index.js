@@ -67,13 +67,17 @@ app.post('/users', async (req, res) => {
   res.json({user: user})
 })
 
-app.put('/user', async (req, res) => {
-  const {firstName, email} = req.body
+app.put('/users', async (req, res) => {
+  const {firstName, lastName, email} = req.body
 
-  db.get('users').find({email: email}).assign({firstName: firstName}).write()
+  db.get('users')
+    .find({email: email})
+    .assign({firstName: firstName, lastName: lastName})
+    .write()
 
   const user = {
     firstName,
+    lastName,
     email,
   }
 
