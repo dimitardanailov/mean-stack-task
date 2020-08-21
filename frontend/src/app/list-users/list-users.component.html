@@ -4,7 +4,11 @@
     <section class="form-filters">
       <mat-form-field [className]="'form-filter-field'">
         <mat-label>Role: </mat-label>
-        <mat-select name="role" formControlName="role">
+        <mat-select
+          name="role"
+          formControlName="role"
+          (selectionChange)="filterData()"
+        >
           <mat-option [value]="item.key" *ngFor="let item of positions">
             {{ item.value }}
           </mat-option>
@@ -41,9 +45,6 @@
       <section [className]="'form-filter-field form-filter-buttons'">
         <button type="submit" class="filterButton" mat-button color="primary">
           Filter
-        </button>
-        <button type="reset" class="filterButton" mat-button color="primary">
-          Reset
         </button>
       </section>
     </section>
