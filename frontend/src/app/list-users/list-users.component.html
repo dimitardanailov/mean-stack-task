@@ -84,7 +84,10 @@
           <section [className]="'table-body-item'">
             <section [className]="'operations'">
               <div [className]="'operation-update'">
-                <mat-icon aria-hidden="false" aria-label="Edit edit icon"
+                <mat-icon
+                  aria-hidden="false"
+                  aria-label="Edit edit icon"
+                  (click)="openUpdateRecordDialog(user)"
                   >edit</mat-icon
                 >
               </div>
