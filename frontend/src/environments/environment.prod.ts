@@ -1,4 +1,4 @@
-const REST_API_SERVER = 'http://mean-ddanailov.eu-4.evennode.com'
+const REST_API_SERVER = 'https://mean-ddanailov.eu-4.evennode.com'
 
 export const environment = {
   production: true,
