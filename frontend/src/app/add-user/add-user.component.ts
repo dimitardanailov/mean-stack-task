@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core'
 import {FormBuilder} from '@angular/forms'
 import User from '../../models/User'
 import {environment} from '../../environments/environment'
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-add-user',
@@ -11,9 +12,14 @@ import {environment} from '../../environments/environment'
 export class AddUserComponent implements OnInit {
   dbHasArtManager = false
   formErrorMessage = ''
+  fieldErrors = {
+    firstName: '',
+    lastName: '',
+    email: '',
+  }
   form
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     this.form = this.formBuilder.group({
       firstName: '',
       lastName: '',
@@ -26,7 +32,80 @@ export class AddUserComponent implements OnInit {
     this.dbHasArtManager = await this.updateDbHasArtManagerProperty()
   }
 
+  /**
+   * The validation process must be replaced with https://xstate.js.org/
+   * The current process creates potential bugs and issues.
+   *
+   * @param event
+   */
+  async validateFirstName(event) {
+    const {value} = event.target
+    if (value.length === 0) {
+      this.fieldErrors.firstName = 'The first name is required!'
+      return
+    }
+
+    const fieldHasNumbers = this.fieldValueHasNumbers(value)
+    if (fieldHasNumbers) {
+      this.fieldErrors.firstName = 'Numbers are not allowed.'
+      return
+    }
+
+    this.fieldErrors.firstName = ''
+  }
+
+  async validateLastName(event) {
+    const {value} = event.target
+
+    if (value.length === 0) {
+      this.fieldErrors.lastName = 'The last name is required!'
+      return
+    }
+
+    const fieldHasNumbers = this.fieldValueHasNumbers(value)
+    if (fieldHasNumbers) {
+      this.fieldErrors.lastName = 'Numbers are not allowed'
+      return
+    }
+
+    this.fieldErrors.lastName = ''
+  }
+
+  async validateEmail(event): Promise<any> {
+    const email = event.target.value
+
+    if (email.length === 0) {
+      this.fieldErrors.email = 'The email field is required'
+      return
+    }
+
+    const emailCanBeUsed = await this.emailIsUnique(email)
+    if (!emailCanBeUsed) {
+      this.fieldErrors.email = 'The email is used by another person'
+      return
+    }
+
+    this.fieldErrors.email = ''
+  }
+
+  disableButtonIsActive() {
+    const firstNameHasErrors = this.fieldErrors.firstName.length > 0
+    const lastNameHasErrors = this.fieldErrors.lastName.length > 0
+    const emailFieldHasErrors = this.fieldErrors.email.length > 0
+
+    if (firstNameHasErrors || lastNameHasErrors || emailFieldHasErrors) {
+      return true
+    }
+
+    return false
+  }
+
   async onSubmit(user: User) {
+    if (user.email.length === 0) {
+      this.formErrorMessage = 'The email field is required!'
+      return
+    }
+
     if (user.role === 'art_manager') {
       this.dbHasArtManager = await this.updateDbHasArtManagerProperty()
       if (this.dbHasArtManager) {
@@ -51,8 +130,8 @@ export class AddUserComponent implements OnInit {
       body: JSON.stringify(user),
     })
 
-    restAPIRequest.then(res => {
-      console.log('response', res)
+    restAPIRequest.then(() => {
+      this.router.navigate(['/'])
     })
   }
 
@@ -99,5 +178,14 @@ export class AddUserComponent implements OnInit {
     })
 
     return promise
+  }
+
+  fieldValueHasNumbers(value) {
+    const regExp = /\d/
+    if (regExp.test(value)) {
+      return true
+    } else {
+      return false
+    }
   }
 }

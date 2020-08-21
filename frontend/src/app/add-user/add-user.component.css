@@ -27,6 +27,11 @@ mat-form-field {
   width: 100%;
 }
 
+.form-message-output {
+  color: #f44336;
+  font-size: 0.6rem;
+}
+
 @media (max-width: 780px) {
   form {
     width: 95%;

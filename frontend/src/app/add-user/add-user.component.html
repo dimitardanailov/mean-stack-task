@@ -5,16 +5,19 @@
   </div>
 
   <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-    <section [className]="'input-field'">
+    <section class="input-field">
       <mat-form-field floatPlaceholder="always">
         <input
           matInput
           placeholder="First name"
           type="text"
           required
+          (focusout)="validateFirstName($event)"
           formControlName="firstName"
         />
-        <mat-error *ngIf=""></mat-error>
+        <span class="form-message-output">
+          {{ fieldErrors.firstName }}
+        </span>
       </mat-form-field>
     </section>
 
@@ -25,8 +28,12 @@
           placeholder="Last name"
           type="text"
           required
+          (focusout)="validateLastName($event)"
           formControlName="lastName"
         />
+        <span class="form-message-output">
+          {{ fieldErrors.lastName }}
+        </span>
       </mat-form-field>
     </section>
 
@@ -38,14 +45,18 @@
           type="email"
           formControlName="email"
           required
+          (focusout)="validateEmail($event)"
         />
+        <span class="form-message-output">
+          {{ fieldErrors.email }}
+        </span>
       </mat-form-field>
     </section>
 
     <section>
       <mat-form-field>
         <mat-label>Role: </mat-label>
-        <mat-select name="role" formControlName="role">
+        <mat-select name="role" formControlName="role" required>
           <mat-option [value]="'artist'">Artist</mat-option>
           <mat-option [value]="'designer'">Designer</mat-option>
           <mat-option [value]="'art_manager'" *ngIf="!dbHasArtManager"
@@ -55,11 +66,17 @@
       </mat-form-field>
     </section>
 
-    {{ formErrorMessage }}
+    <section class="form-message-output">
+      {{ formErrorMessage }}
+    </section>
 
-    <button>
-      <mat-icon aria-hidden="false" aria-label="Add add icon">add</mat-icon
-      >Create a new user
+    <button
+      type="submit"
+      mat-button
+      color="primary"
+      [disabled]="disableButtonIsActive()"
+    >
+      Create a new user
     </button>
   </form>
 </section>
