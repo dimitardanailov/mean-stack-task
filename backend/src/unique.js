@@ -1,12 +1,12 @@
 function uniqueEmails(array) {
-  const uniqueEmails = array.filter(function (currentElement, index, arr) {
+  const emails = array.filter(function (currentElement, index, arr) {
     return (
       index ===
       arr.findIndex(arrElement => currentElement.email === arrElement.email)
     )
   })
 
-  return uniqueEmails
+  return emails
 }
 
 export default uniqueEmails
