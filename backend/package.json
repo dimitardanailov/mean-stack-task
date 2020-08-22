@@ -4,9 +4,11 @@
   "description": "Service is working only with user data",
   "main": "index.js",
   "scripts": {
+    "build": "babel --delete-dir-on-start --out-dir dist --copy-files --ignore \"**/__tests__/**,**/__mocks__/**\" --no-copy-ignored src",
     "dev": "nodemon -r esm index.js --ignore **.json",
     "start": "node -r esm index.js",
-    "test": "jest"
+    "serve": "npm run build && node dist/index.js",
+    "test": "jest --config test/jest.config.js"
   },
   "repository": {
     "type": "git",
@@ -30,21 +32,12 @@
     "node-cron": "^2.0.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
+    "@babel/register": "^7.10.5",
+    "babel-jest": "^26.3.0",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4"
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ]
   }
 }
