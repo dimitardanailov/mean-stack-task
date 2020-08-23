@@ -1,26 +1,9 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+import restAPIconfigurations from './shared/restAPIconfigurations'
 
 const REST_API_SERVER = 'http://localhost:8080'
+const REST_API = restAPIconfigurations(REST_API_SERVER)
 
 export const environment = {
   production: false,
-  REST_API: {
-    list_users: `${REST_API_SERVER}/users`,
-    roleArtManagerIsAvailable: `${REST_API_SERVER}/users/role-art-manager-is-available`,
-    emailIsUnique: `${REST_API_SERVER}/users/email-is-unique`,
-    createUser: `${REST_API_SERVER}/users`,
-    updateUser: `${REST_API_SERVER}/users`,
-    deleteUser: `${REST_API_SERVER}/users`,
-  },
+  REST_API,
 }
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
