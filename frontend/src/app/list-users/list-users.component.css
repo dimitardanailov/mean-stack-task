@@ -60,9 +60,17 @@
   position: relative;
 
   display: inline-block;
-  flex-grow: 1;
-  max-width: 20%;
+  width: 22.5%;
   text-overflow: hidden;
+}
+
+.table-body-item:last-child,
+.table-header-column:last-child {
+  width: 10%;
+}
+
+.table-header-column {
+  font-weight: bold;
 }
 
 .table-body-row {
