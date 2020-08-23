@@ -61,7 +61,8 @@
 
   display: inline-block;
   width: 22.5%;
-  text-overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .table-body-item:last-child,

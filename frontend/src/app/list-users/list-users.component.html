@@ -72,7 +72,7 @@
           <section class="table-body-item">
             {{ user.lastName }}
           </section>
-          <section class="table-body-item">
+          <section class="table-body-item" title="{{ user.email }}">
             {{ user.email }}
           </section>
           <section class="table-body-item">
@@ -82,6 +82,7 @@
             <section class="operations">
               <div class="operation-update">
                 <mat-icon
+                  title="Update the existing user"
                   aria-hidden="false"
                   aria-label="Edit edit icon"
                   (click)="openUpdateRecordDialog(user)"
@@ -90,6 +91,7 @@
               </div>
               <div class="operation-remove">
                 <mat-icon
+                  title="Remove the current record"
                   aria-hidden="false"
                   aria-label="Remove delete icon"
                   (click)="openListConformationDialog(user.email)"
