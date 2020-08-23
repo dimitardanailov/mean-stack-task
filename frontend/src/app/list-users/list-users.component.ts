@@ -21,11 +21,11 @@ interface UIUser extends User {
 })
 export class ListUsersComponent implements OnInit {
   displayedColumns: string[] = [
-    'firstName',
-    'lastName',
-    'email',
-    'role',
-    'operations',
+    'First Name',
+    'Last Name',
+    'Email',
+    'Role',
+    null,
   ]
   users: UIUser[] = []
   positions: SelectBoxItem[] = [
