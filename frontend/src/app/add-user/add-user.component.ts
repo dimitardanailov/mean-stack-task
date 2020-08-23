@@ -89,6 +89,10 @@ export class AddUserComponent implements OnInit {
     this.fieldErrors.email = ''
   }
 
+  async roleIsUpdated(): Promise<any> {
+    this.fieldErrors.role = ''
+  }
+
   disableButtonIsActive() {
     const firstNameHasErrors = this.fieldErrors.firstName.length > 0
     const lastNameHasErrors = this.fieldErrors.lastName.length > 0

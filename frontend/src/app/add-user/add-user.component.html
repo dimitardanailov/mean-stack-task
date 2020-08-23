@@ -56,7 +56,12 @@
     <section>
       <mat-form-field>
         <mat-label>Role: </mat-label>
-        <mat-select name="role" formControlName="role" required>
+        <mat-select
+          name="role"
+          formControlName="role"
+          required
+          (selectionChange)="roleIsUpdated()"
+        >
           <mat-option [value]="'artist'">Artist</mat-option>
           <mat-option [value]="'designer'">Designer</mat-option>
           <mat-option [value]="'art_manager'" *ngIf="!dbHasArtManager"
