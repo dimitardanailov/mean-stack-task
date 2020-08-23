@@ -1,32 +1,36 @@
-<h2 mat-dialog-title>Update an existing user</h2>
-<mat-dialog-content class="mat-typography">
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
-    <section class="input-field">
-      <mat-form-field floatPlaceholder="always">
-        <input
-          matInput
-          placeholder="First name"
-          type="text"
-          required
-          formControlName="firstName"
-        />
-      </mat-form-field>
-    </section>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form">
+  <h2 mat-dialog-title class="form-title">Update the existing user</h2>
+  <mat-dialog-content class="mat-typography">
+    <mat-form-field floatPlaceholder="always" class="form-field">
+      <input
+        matInput
+        placeholder="First name"
+        type="text"
+        required
+        formControlName="firstName"
+      />
+      <span class="form-message-output">
+        {{ fieldErrors.firstName }}
+      </span>
+    </mat-form-field>
 
-    <section>
-      <mat-form-field floatPlaceholder="always">
-        <input
-          matInput
-          placeholder="Last name"
-          type="text"
-          required
-          formControlName="lastName"
-        />
-      </mat-form-field>
-    </section>
-
-    <button type="submit" mat-button color="primary">
-      Update an existing user
+    <mat-form-field floatPlaceholder="always" class="form-field">
+      <input
+        matInput
+        placeholder="Last name"
+        type="text"
+        required
+        formControlName="lastName"
+      />
+      <span class="form-message-output">
+        {{ fieldErrors.lastName }}
+      </span>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="closeDialog()" color="primary">
+      No thanks!
     </button>
-  </form>
-</mat-dialog-content>
+    <button mat-button type="submit" color="primary">Save!</button>
+  </mat-dialog-actions>
+</form>
