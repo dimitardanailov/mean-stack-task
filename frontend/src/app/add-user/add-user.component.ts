@@ -80,6 +80,16 @@ export class AddUserComponent implements OnInit {
       return
     }
 
+    /**
+     * Article:
+     * https://ui.dev/validate-email-address-javascript/
+     */
+    const emailIsValid = /\S+@\S+\.\S+/.test(email)
+    if (!emailIsValid) {
+      this.fieldErrors.email = 'The current email format is invalid'
+      return
+    }
+
     const emailCanBeUsed = await this.emailIsUnique(email)
     if (!emailCanBeUsed) {
       this.fieldErrors.email = 'The email is used by another person'
