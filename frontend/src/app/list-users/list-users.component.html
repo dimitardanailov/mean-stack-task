@@ -1,8 +1,8 @@
-<section [className]="'page-holder'">
-  <div [className]="'page-title'">Database users</div>
+<section class="page-holder">
+  <div class="page-title">Database users</div>
   <form [formGroup]="form" (ngSubmit)="filterData()">
     <section class="form-filters">
-      <mat-form-field [className]="'form-filter-field'">
+      <mat-form-field class="form-filter-field">
         <mat-label>Role: </mat-label>
         <mat-select
           name="role"
@@ -15,7 +15,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field [className]="'form-filter-field'">
+      <mat-form-field class="form-filter-field">
         <input
           matInput
           placeholder="First name"
@@ -24,7 +24,7 @@
         />
       </mat-form-field>
 
-      <mat-form-field [className]="'form-filter-field'">
+      <mat-form-field class="form-filter-field">
         <input
           matInput
           placeholder="Last Name"
@@ -33,7 +33,7 @@
         />
       </mat-form-field>
 
-      <mat-form-field [className]="'form-filter-field'">
+      <mat-form-field class="form-filter-field">
         <input
           matInput
           placeholder="Email"
@@ -42,7 +42,7 @@
         />
       </mat-form-field>
 
-      <section [className]="'form-filter-field form-filter-buttons'">
+      <section class="form-filter-field form-filter-buttons">
         <button type="submit" class="filterButton" mat-button color="primary">
           Filter
         </button>
@@ -50,17 +50,14 @@
     </section>
   </form>
 
-  <section [className]="'table'">
-    <section [className]="'table-header'">
-      <div
-        *ngFor="let column of displayedColumns"
-        [className]="'table-header-column'"
-      >
+  <section class="table">
+    <section class="table-header">
+      <div *ngFor="let column of displayedColumns" class="table-header-column">
         {{ column }}
       </div>
     </section>
 
-    <section [className]="'table-body'">
+    <section class="table-body">
       <section *ngFor="let user of users">
         <section
           [className]="
@@ -69,21 +66,21 @@
               : 'table-body-row table-body-row-hidden'
           "
         >
-          <section [className]="'table-body-item'">
+          <section class="table-body-item">
             {{ user.firstName }}
           </section>
-          <section [className]="'table-body-item'">
+          <section class="table-body-item">
             {{ user.lastName }}
           </section>
-          <section [className]="'table-body-item'">
+          <section class="table-body-item">
             {{ user.email }}
           </section>
-          <section [className]="'table-body-item'">
+          <section class="table-body-item">
             {{ roles.get(user.role) }}
           </section>
-          <section [className]="'table-body-item'">
-            <section [className]="'operations'">
-              <div [className]="'operation-update'">
+          <section class="table-body-item">
+            <section class="operations">
+              <div class="operation-update">
                 <mat-icon
                   aria-hidden="false"
                   aria-label="Edit edit icon"
@@ -91,7 +88,7 @@
                   >edit</mat-icon
                 >
               </div>
-              <div [className]="'operation-remove'">
+              <div class="operation-remove">
                 <mat-icon
                   aria-hidden="false"
                   aria-label="Remove delete icon"
