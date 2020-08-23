@@ -121,7 +121,7 @@ export class ListUsersComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(dbUser => {
-      if (dbUser !== null) {
+      if (typeof dbUser === 'object') {
         this.users.forEach(loopUser => {
           if (loopUser.email === dbUser.email) {
             loopUser.firstName = dbUser.firstName
