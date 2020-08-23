@@ -16,7 +16,9 @@ import {ListUsersComponent} from './list-users/list-users.component'
 // Dialogs
 import {MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material/dialog'
 import {ListConformationDialog} from './list-users/dialogs/list-conformation-dialog'
-import {UpdateRecordDialog} from './list-users/dialogs/update-record-dialog'
+import {UpdateRecordDialog} from './list-users/dialogs/update-record-dialog';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment'
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import {UpdateRecordDialog} from './list-users/dialogs/update-record-dialog'
     AppMaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   entryComponents: [ListConformationDialog, UpdateRecordDialog],
   providers: [
