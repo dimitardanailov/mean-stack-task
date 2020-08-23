@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel --delete-dir-on-start --out-dir dist --copy-files --ignore \"**/__tests__/**,**/__mocks__/**\" --no-copy-ignored src",
-    "dev": "nodemon -r esm index.js --ignore **.json",
+    "dev": "npm run build && node index.js",
     "start": "node -r esm index.js",
     "serve": "npm run build && node dist/index.js",
     "test": "jest --config test/jest.config.js"
