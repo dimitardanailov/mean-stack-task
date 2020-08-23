@@ -1,0 +1,21 @@
+.form {
+  position: relative;
+
+  padding: 1rem 0;
+}
+
+.form-title {
+  position: relative;
+
+  display: block;
+  text-align: center;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.form-message-output {
+  color: #f44336;
+  font-size: 0.6rem;
+}
