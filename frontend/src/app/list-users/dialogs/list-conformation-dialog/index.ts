@@ -8,6 +8,7 @@ export interface DialogData {
 @Component({
   selector: 'list-conformation-dialog',
   templateUrl: 'list-conformation-dialog.html',
+  styleUrls: ['./list-conformation-dialog.css'],
 })
 export class ListConformationDialog {
   constructor(
