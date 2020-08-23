@@ -11,9 +11,14 @@ export interface DialogData {
 @Component({
   selector: 'update-record-dialog',
   templateUrl: 'update-record-dialog.html',
+  styleUrls: ['./update-record-dialog.css'],
 })
 export class UpdateRecordDialog {
   form
+  fieldErrors = {
+    firstName: '',
+    lastName: '',
+  }
 
   constructor(
     public dialogRef: MatDialogRef<UpdateRecordDialog>,
@@ -28,7 +33,21 @@ export class UpdateRecordDialog {
     })
   }
 
+  async closeDialog() {
+    this.dialogRef.close()
+  }
+
   async onSubmit(user: User) {
+    if (user.firstName.length === 0) {
+      this.fieldErrors.firstName = 'The field is required!'
+      return
+    }
+
+    if (user.lastName.length === 0) {
+      this.fieldErrors.lastName = 'The field is required!'
+      return
+    }
+
     const restAPIRequest = fetch(environment.REST_API.updateUser, {
       method: 'PUT',
       headers: {
