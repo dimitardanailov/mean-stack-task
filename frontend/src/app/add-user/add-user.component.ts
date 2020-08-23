@@ -16,6 +16,7 @@ export class AddUserComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
+    role: '',
   }
   form
 
@@ -101,15 +102,30 @@ export class AddUserComponent implements OnInit {
   }
 
   async onSubmit(user: User) {
+    if (user.firstName.length === 0) {
+      this.fieldErrors.firstName = 'The first name is required!'
+      return
+    }
+
+    if (user.lastName.length === 0) {
+      this.fieldErrors.lastName = 'The last name is required!'
+      return
+    }
+
     if (user.email.length === 0) {
-      this.formErrorMessage = 'The email field is required!'
+      this.fieldErrors.email = 'The email field is required!'
+      return
+    }
+
+    if (user.role.length === 0) {
+      this.fieldErrors.role = 'The role field is required!'
       return
     }
 
     if (user.role === 'art_manager') {
       this.dbHasArtManager = await this.updateDbHasArtManagerProperty()
       if (this.dbHasArtManager) {
-        this.formErrorMessage = 'Please choise a different position!'
+        this.fieldErrors.role = 'Please choise a different position!'
         return
       }
     }
@@ -119,8 +135,6 @@ export class AddUserComponent implements OnInit {
       this.formErrorMessage = "The current email can't be used!"
       return
     }
-
-    console.log('json', JSON.stringify(user))
 
     const restAPIRequest = fetch(environment.REST_API.createUser, {
       method: 'POST',
