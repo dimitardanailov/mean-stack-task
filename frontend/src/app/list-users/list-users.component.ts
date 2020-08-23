@@ -10,6 +10,8 @@ import SelectBoxItem from '../../ui-models/SelectBoxItem'
 import {environment} from '../../environments/environment'
 import roles from '../../db/roles'
 
+import fetchRequest from '../../requests/fetchRequest'
+
 interface UIUser extends User {
   isVisible: Boolean
 }
@@ -52,25 +54,23 @@ export class ListUsersComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<any> {
-    fetch(environment.REST_API.list_users)
-      .then(async res => {
-        const data = await res.json()
-        const uiUsers = []
-        data.users.forEach(element => {
-          const tempUser = {
-            isVisible: true,
-            ...element,
-          }
-          uiUsers.push(tempUser)
-        })
+    const next = async res => {
+      const data = await res.json()
+      const uiUsers = []
+      data.users.forEach(element => {
+        const tempUser = {
+          isVisible: true,
+          ...element,
+        }
+        uiUsers.push(tempUser)
+      })
 
-        this.users = uiUsers.map(element => {
-          return element
-        })
+      this.users = uiUsers.map(element => {
+        return element
       })
-      .catch(() => {
-        console.error(`${environment.REST_API.list_users} is unreachable`)
-      })
+    }
+
+    fetchRequest(next, environment.REST_API.list_users)
   }
 
   async filterData(): Promise<any> {
